@@ -27,7 +27,7 @@ public class ManagementController {
     }
 
     @PostMapping("/indexPage")
-    public StringBuilder indexPage(String url) {
+    public synchronized StringBuilder indexPage(String url) {
         return managementService.updateUrl(url);
     }
 }
