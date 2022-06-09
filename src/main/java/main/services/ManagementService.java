@@ -2,6 +2,7 @@ package main.services;
 
 import main.config.Config;
 import main.dto.LinkNodeDto;
+import main.exceptions.BadSiteException;
 import main.model.Field;
 import main.model.Site;
 import main.model.StatusType;
@@ -80,7 +81,7 @@ public class ManagementService {
         siteRepository.save(siteToDB);
     }
 
-    public StringBuilder stopIndexing() {
+    public StringBuilder stopIndexing() throws BadSiteException {
         StringBuilder indexing = new StringBuilder();
         if (!isIndexingService.indexingCheck()) {
             return indexing.append("{ \"result\" : ").append(false).append(",")
@@ -88,6 +89,9 @@ public class ManagementService {
         } else {
             threads.forEach(ThreadDistributor::stopThread);
             Iterable<Site> sites = siteRepository.findAll();
+            if (!sites.iterator().hasNext()) {
+                throw new BadSiteException("Объект типа site не найден в БД");
+            }
             sites.forEach(site -> {
                 if (site.getStatus().equals(StatusType.INDEXING)) {
                     site.setStatus(StatusType.FAILED);

@@ -52,12 +52,7 @@ public class SiteBypassService extends RecursiveAction {
     @Override
     protected void compute() {
         if (!currentThread().isInterrupted()) {
-            Optional<Site> optionalSite = siteRepository.findById(siteId);
-            optionalSite.ifPresent(updatableSite -> {
-                updatableSite.setStatus(StatusType.INDEXING);
-                updatableSite.setStatusTime(System.currentTimeMillis());
-                siteRepository.save(updatableSite);
-            });
+            siteChange();
             try {
                 sleep(100);
                 path = node.getUrl().substring(node.getRootElement().getUrl().length()) + "/";
@@ -79,6 +74,15 @@ public class SiteBypassService extends RecursiveAction {
                 task.join();
             }
         }
+    }
+
+    private void siteChange() {
+        Optional<Site> optionalSite = siteRepository.findById(siteId);
+        optionalSite.ifPresent(updatableSite -> {
+            updatableSite.setStatus(StatusType.INDEXING);
+            updatableSite.setStatusTime(System.currentTimeMillis());
+            siteRepository.save(updatableSite);
+        });
     }
 
     private void connectToSite() {

@@ -2,6 +2,7 @@ package main.services;
 
 import main.config.Config;
 import main.dto.LinkNodeDto;
+import main.exceptions.BadSiteException;
 import main.model.Site;
 import main.model.StatusType;
 import main.repositories.*;

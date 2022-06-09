@@ -3,6 +3,10 @@ package main.services;
 
 import main.dto.SearchPageDto;
 import main.dto.SearchResultDto;
+import main.exceptions.BadIndexException;
+import main.exceptions.BadLemmaException;
+import main.exceptions.BadPageException;
+import main.exceptions.EmptyFrequencyException;
 import main.model.Index;
 import main.model.Lemma;
 import main.model.Site;
@@ -45,7 +49,7 @@ public class SearchService {
         this.siteRepository = siteRepository;
     }
 
-    public ResponseEntity<SearchResultDto> startSearch(String siteUrl, String searchQuery) {
+    public ResponseEntity<SearchResultDto> startSearch(String siteUrl, String searchQuery) throws BadIndexException, BadLemmaException, EmptyFrequencyException, BadPageException {
         searchResultDto = new SearchResultDto();
         this.searchQuery = searchQuery;
         lemmasFrequency.clear();
@@ -73,8 +77,13 @@ public class SearchService {
         return informationOutput();
     }
 
-    private void getLemmaFrequencyFromDB() {
-        double normalFrequency = lemmaRepository.getMaxFrequency() * 0.85;
+    private void getLemmaFrequencyFromDB() throws EmptyFrequencyException {
+        double normalFrequency;
+        try {
+            normalFrequency = lemmaRepository.getMaxFrequency() * 0.85;
+        } catch (Exception ex) {
+            throw new EmptyFrequencyException("Отсутвствует максимальное значение frequency в БД");
+        }
         for (String lemma : searchQueryLemmas.keySet()) {
             int lemmaFrequency = 0;
             try {
@@ -95,7 +104,7 @@ public class SearchService {
         }
     }
 
-    private void pageSifting(int countOfFoundLemmas) {
+    private void pageSifting(int countOfFoundLemmas) throws BadIndexException, BadLemmaException, BadPageException {
         String minFrequencyLemma = "";
         oldPages.clear();
 
@@ -107,6 +116,9 @@ public class SearchService {
             Set<Integer> pagesId = new TreeSet<>();
             for (Integer idLemma : lemmasId) {
                 Iterable<Index> indexes = indexRepository.findByLemmaId(idLemma);
+                if (!indexes.iterator().hasNext()) {
+                    throw new BadIndexException("Объект типа index не найден в БД");
+                }
                 indexes.forEach(index -> pagesId.add(index.getPageId()));
             }
             lemmasFrequency.remove(minFrequencyLemma);
@@ -127,13 +139,16 @@ public class SearchService {
         }
     }
 
-    private void findPages(Set<Integer> pagesId) {
+    private void findPages(Set<Integer> pagesId) throws BadPageException {
         for (int pageId : pagesId) {
             if (siteId != 0) {
                 Optional<Page> page = pageRepository.findByIdAndSiteId(pageId, siteId);
                 page.ifPresent(presentPage -> newPages.add(presentPage));
             } else {
                 Optional<Page> page = pageRepository.findById(pageId);
+                if (page.isEmpty()) {
+                    throw new BadPageException("Объект типа page не найден в БД");
+                }
                 page.ifPresent(presentPage -> newPages.add(presentPage));
             }
         }
@@ -150,7 +165,7 @@ public class SearchService {
         return minFrequencyLemma;
     }
 
-    private void rankSort() {
+    private void rankSort() throws BadLemmaException {
         sortedLinks.clear();
         float pageRank;
         Page maxRankPage = new Page();
@@ -194,15 +209,20 @@ public class SearchService {
         }
     }
 
-    private void getLemmasIdFromDB(String lemma, List<Integer> lemmasId) {
+    private void getLemmasIdFromDB(String lemma, List<Integer> lemmasId) throws BadLemmaException {
         if (siteId != 0) {
             Optional<Lemma> optionalLemma = lemmaRepository.findByLemmaAndSiteId(lemma, siteId);
             if (optionalLemma.isPresent()) {
                 int lemmaId = optionalLemma.get().getId();
                 lemmasId.add(lemmaId);
+            } else {
+                throw new BadLemmaException("Объект типа lemma не найден в БД");
             }
         } else {
             Iterable<Lemma> listLemmas = lemmaRepository.findByLemma(lemma);
+            if (!listLemmas.iterator().hasNext()) {
+                throw new BadLemmaException("Объект типа lemma не найден в БД");
+            }
             for (Lemma singleLemma : listLemmas) {
                 lemmasId.add(singleLemma.getId());
             }

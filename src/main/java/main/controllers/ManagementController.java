@@ -1,5 +1,6 @@
 package main.controllers;
 
+import main.exceptions.BadSiteException;
 import main.services.ManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +22,12 @@ public class ManagementController {
     }
 
     @GetMapping("/stopIndexing")
-    public StringBuilder stopIndexing() {
+    public StringBuilder stopIndexing() throws BadSiteException {
         return managementService.stopIndexing();
     }
 
     @PostMapping("/indexPage")
-    public synchronized StringBuilder indexPage(String url) {
+    public StringBuilder indexPage(String url) {
         return managementService.updateUrl(url);
     }
 }

@@ -6,7 +6,7 @@ spring:
   jpa:
     hibernate:
       show-sql: true
-      ddl-auto: update
+      ddl-auto: create
 custom:
   sites:
     - url: https://blablablabla.ru

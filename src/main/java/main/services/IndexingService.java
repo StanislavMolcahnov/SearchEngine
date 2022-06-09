@@ -1,5 +1,6 @@
 package main.services;
 
+import main.exceptions.BadFieldException;
 import main.repositories.FieldRepository;
 import main.repositories.IndexRepository;
 import main.repositories.LemmaRepository;
@@ -52,6 +53,13 @@ public class IndexingService {
 
     private void saveToIndex(TreeMap<String, Integer> allLemmas, TreeMap<String, Integer> titleLemmas, TreeMap<String, Integer> bodyLemmas, int pageId) {
         for (String lemma : allLemmas.keySet()) {
+            if (fieldRepository.findByname("title") == null || fieldRepository.findByname("body") == null) {
+                try {
+                    throw new BadFieldException("Объект типа field не найден в БД");
+                } catch (BadFieldException e) {
+                    throw new RuntimeException(e);
+                }
+            }
             float rank = 0;
             if (titleLemmas.containsKey(lemma)) {
                 rank = titleLemmas.get(lemma) * fieldRepository.findByname("title").getWeight();
