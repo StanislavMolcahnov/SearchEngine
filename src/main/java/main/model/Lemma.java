@@ -22,7 +22,7 @@ public class Lemma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 191)
     private String lemma;
 
     private int frequency;

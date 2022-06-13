@@ -22,7 +22,7 @@ public class Page implements Comparable<Page> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false, length = 768)
+    @Column(nullable = false, length = 191)
     private String path;
 
     private int code;
