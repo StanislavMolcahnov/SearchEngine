@@ -1,1 +1,1 @@
-web: java -jar target/SearchEngine-1.0.jar
+web: java -jar target/SearchEngine-1.0-jar-with-dependencies.jar
