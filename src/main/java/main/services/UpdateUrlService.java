@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
+@RequiredArgsConstructor
 public class UpdateUrlService {
     private String path;
     private int siteId = 0;
@@ -27,17 +27,6 @@ public class UpdateUrlService {
     private final PageRepository pageRepository;
     private final IndexRepository indexRepository;
     private Document site;
-
-    /*public UpdateUrlService(SavePageService savePageService, SiteRepository siteRepository, Config config, IndexingService indexingService,
-                            PageRepository pageRepository, IndexRepository indexRepository) {
-        this.savePageService = savePageService;
-        this.siteRepository = siteRepository;
-        this.config = config;
-        this.indexingService = indexingService;
-        this.pageRepository = pageRepository;
-        this.indexRepository = indexRepository;
-    }*/
-
     @Transactional
     public boolean update(String url) {
         checkUrl(url);

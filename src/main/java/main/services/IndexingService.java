@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.TreeMap;
 
 @Service
-@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
+@RequiredArgsConstructor
 public class IndexingService {
     private int siteId;
     private final PageRepository pageRepository;

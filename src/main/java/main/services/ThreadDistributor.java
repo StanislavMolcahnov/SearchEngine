@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.concurrent.ForkJoinPool;
 
 @Service
-@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
+@RequiredArgsConstructor
 public class ThreadDistributor extends Thread {
     private final SavePageService savePageService;
 
@@ -28,18 +28,6 @@ public class ThreadDistributor extends Thread {
     private final IndexRepository indexRepository;
     private final SiteRepository siteRepository;
     private final ForkJoinPool pool = new ForkJoinPool();
-
-    /*@Autowired
-    public ThreadDistributor(SavePageService savePageService, Config config, PageRepository pageRepository, FieldRepository fieldRepository,
-                             LemmaRepository lemmaRepository, IndexRepository indexRepository, SiteRepository siteRepository) {
-        this.savePageService = savePageService;
-        this.config = config;
-        this.pageRepository = pageRepository;
-        this.fieldRepository = fieldRepository;
-        this.lemmaRepository = lemmaRepository;
-        this.indexRepository = indexRepository;
-        this.siteRepository = siteRepository;
-    }*/
 
     @Override
     public void run() {

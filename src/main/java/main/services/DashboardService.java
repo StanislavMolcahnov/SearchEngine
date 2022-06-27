@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
+@RequiredArgsConstructor
 public class DashboardService {
     private final SiteRepository siteRepository;
     private final PageRepository pageRepository;

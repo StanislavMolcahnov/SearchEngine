@@ -25,7 +25,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
+@RequiredArgsConstructor
 public class SearchService {
     private SearchResultDto searchResultDto;
     private final PageRepository pageRepository;
@@ -42,14 +42,6 @@ public class SearchService {
     private final Map<Page, Float> linksWithRank = new TreeMap<>();
     private final Map<Page, Float> sortedLinks = new LinkedHashMap<>();
     private String searchQuery;
-
-    /*@Autowired
-    public SearchService(PageRepository pageRepository, IndexRepository indexRepository, LemmaRepository lemmaRepository, SiteRepository siteRepository) {
-        this.pageRepository = pageRepository;
-        this.indexRepository = indexRepository;
-        this.lemmaRepository = lemmaRepository;
-        this.siteRepository = siteRepository;
-    }*/
 
     public ResponseEntity<SearchResultDto> startSearch(String siteUrl, String searchQuery) throws BadIndexException, BadLemmaException, EmptyFrequencyException, BadPageException {
         searchResultDto = new SearchResultDto();

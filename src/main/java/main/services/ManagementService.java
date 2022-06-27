@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
+@RequiredArgsConstructor
 public class ManagementService {
     private final SavePageService savePageService;
     private int numberOfSite = 0;
@@ -29,23 +29,6 @@ public class ManagementService {
     private final LemmaRepository lemmaRepository;
     private final IndexRepository indexRepository;
     private final UpdateUrlService updateUrlService;
-
-    /*@Autowired
-    public ManagementService(SavePageService savePageService, ClearDBService clearDBService, IsIndexingService isIndexingService, FieldRepository fieldRepository,
-                             Config config, PageRepository pageRepository, SiteRepository siteRepository,
-                             LemmaRepository lemmaRepository, IndexRepository indexRepository, UpdateUrlService updateUrlService) {
-        this.savePageService = savePageService;
-        this.clearDBService = clearDBService;
-        this.isIndexingService = isIndexingService;
-        this.fieldRepository = fieldRepository;
-        this.config = config;
-        this.pageRepository = pageRepository;
-        this.siteRepository = siteRepository;
-        this.lemmaRepository = lemmaRepository;
-        this.indexRepository = indexRepository;
-        this.updateUrlService = updateUrlService;
-    }*/
-
     public StringBuilder startIndexing() {
         StringBuilder indexing = new StringBuilder();
         if (isIndexingService.indexingCheck()) {

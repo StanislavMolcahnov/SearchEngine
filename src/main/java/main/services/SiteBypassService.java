@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 import static java.lang.Thread.*;
 
 @Service
-@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
+@RequiredArgsConstructor
 public class SiteBypassService extends RecursiveAction {
     private String path;
     private final SavePageService savePageService;
@@ -37,19 +37,6 @@ public class SiteBypassService extends RecursiveAction {
     private final PageRepository pageRepository;
     private final List<SiteBypassService> taskList = new ArrayList<>();
     private final SiteRepository siteRepository;
-
-    /*@Autowired
-    public SiteBypassService(SavePageService savePageService, FieldRepository fieldRepository, LemmaRepository lemmaRepository,
-                             IndexRepository indexRepository, Config config, PageRepository pageRepository,
-                             SiteRepository siteRepository) {
-        this.savePageService = savePageService;
-        this.fieldRepository = fieldRepository;
-        this.lemmaRepository = lemmaRepository;
-        this.indexRepository = indexRepository;
-        this.config = config;
-        this.pageRepository = pageRepository;
-        this.siteRepository = siteRepository;
-    }*/
 
     @Override
     protected void compute() {
