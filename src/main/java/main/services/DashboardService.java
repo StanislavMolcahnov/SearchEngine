@@ -1,5 +1,6 @@
 package main.services;
 
+import lombok.RequiredArgsConstructor;
 import main.dto.DetailedStatisticsDto;
 import main.dto.ResultStatisticDto;
 import main.dto.StatisticsDto;
@@ -16,18 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
 public class DashboardService {
     private final SiteRepository siteRepository;
     private final PageRepository pageRepository;
     private final LemmaRepository lemmaRepository;
     private final IsIndexingService isIndexingService;
-    @Autowired
-    public DashboardService(SiteRepository siteRepository, PageRepository pageRepository, LemmaRepository lemmaRepository, IsIndexingService isIndexingService) {
-        this.siteRepository = siteRepository;
-        this.pageRepository = pageRepository;
-        this.lemmaRepository = lemmaRepository;
-        this.isIndexingService = isIndexingService;
-    }
     public ResponseEntity<ResultStatisticDto> calculateStatistics() {
         ResultStatisticDto result = new ResultStatisticDto();
         StatisticsDto statistics = new StatisticsDto();

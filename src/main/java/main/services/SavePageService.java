@@ -1,23 +1,22 @@
 package main.services;
 
+import lombok.RequiredArgsConstructor;
 import main.model.Page;
 import main.repositories.PageRepository;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
 @Service
+@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
 public class SavePageService {
     private String title;
     private String body;
     private int statusCode;
     private final PageRepository pageRepository;
-
-    public SavePageService(PageRepository pageRepository) {
-        this.pageRepository = pageRepository;
-    }
 
     public void siteToDBPage(Document site, String path, int siteId) throws IOException {
         Connection.Response response = site.connection().execute();

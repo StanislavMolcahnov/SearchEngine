@@ -1,5 +1,6 @@
 package main.services;
 
+import lombok.RequiredArgsConstructor;
 import main.config.Config;
 import main.dto.LinkNodeDto;
 import main.model.Site;
@@ -22,6 +23,7 @@ import java.util.regex.Pattern;
 import static java.lang.Thread.*;
 
 @Service
+@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
 public class SiteBypassService extends RecursiveAction {
     private String path;
     private final SavePageService savePageService;
@@ -36,7 +38,7 @@ public class SiteBypassService extends RecursiveAction {
     private final List<SiteBypassService> taskList = new ArrayList<>();
     private final SiteRepository siteRepository;
 
-    @Autowired
+    /*@Autowired
     public SiteBypassService(SavePageService savePageService, FieldRepository fieldRepository, LemmaRepository lemmaRepository,
                              IndexRepository indexRepository, Config config, PageRepository pageRepository,
                              SiteRepository siteRepository) {
@@ -47,7 +49,7 @@ public class SiteBypassService extends RecursiveAction {
         this.config = config;
         this.pageRepository = pageRepository;
         this.siteRepository = siteRepository;
-    }
+    }*/
 
     @Override
     protected void compute() {

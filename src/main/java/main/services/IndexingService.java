@@ -1,5 +1,6 @@
 package main.services;
 
+import lombok.RequiredArgsConstructor;
 import main.exceptions.BadFieldException;
 import main.repositories.FieldRepository;
 import main.repositories.IndexRepository;
@@ -14,20 +15,13 @@ import java.util.Optional;
 import java.util.TreeMap;
 
 @Service
+@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
 public class IndexingService {
     private int siteId;
     private final PageRepository pageRepository;
     private final FieldRepository fieldRepository;
     private final LemmaRepository lemmaRepository;
     private final IndexRepository indexRepository;
-
-    @Autowired
-    public IndexingService(PageRepository pageRepository, FieldRepository fieldRepository, LemmaRepository lemmaRepository, IndexRepository indexRepository) {
-        this.pageRepository = pageRepository;
-        this.fieldRepository = fieldRepository;
-        this.lemmaRepository = lemmaRepository;
-        this.indexRepository = indexRepository;
-    }
 
     public void startIndexingWebPage(String path, String title, String body, int code) {
         if (code == 200) {

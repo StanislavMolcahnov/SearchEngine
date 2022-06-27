@@ -1,5 +1,6 @@
 package main.services;
 
+import lombok.RequiredArgsConstructor;
 import main.config.Config;
 import main.dto.LinkNodeDto;
 import main.exceptions.BadSiteException;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.concurrent.ForkJoinPool;
 
 @Service
+@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
 public class ThreadDistributor extends Thread {
     private final SavePageService savePageService;
 
@@ -27,7 +29,7 @@ public class ThreadDistributor extends Thread {
     private final SiteRepository siteRepository;
     private final ForkJoinPool pool = new ForkJoinPool();
 
-    @Autowired
+    /*@Autowired
     public ThreadDistributor(SavePageService savePageService, Config config, PageRepository pageRepository, FieldRepository fieldRepository,
                              LemmaRepository lemmaRepository, IndexRepository indexRepository, SiteRepository siteRepository) {
         this.savePageService = savePageService;
@@ -37,7 +39,7 @@ public class ThreadDistributor extends Thread {
         this.lemmaRepository = lemmaRepository;
         this.indexRepository = indexRepository;
         this.siteRepository = siteRepository;
-    }
+    }*/
 
     @Override
     public void run() {

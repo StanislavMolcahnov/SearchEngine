@@ -1,9 +1,12 @@
 package main.dto;
 
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 public class LinkNodeDto {
     private volatile LinkNodeDto parent;
+    @Getter
     private final String url;
     private final ArrayList<LinkNodeDto> children;
 
@@ -11,10 +14,6 @@ public class LinkNodeDto {
         this.parent = null;
         this.url = url;
         this.children = new ArrayList<>();
-    }
-
-    public String getUrl() {
-        return url;
     }
     public synchronized void addChild(LinkNodeDto child) {
         LinkNodeDto root = getRootElement();

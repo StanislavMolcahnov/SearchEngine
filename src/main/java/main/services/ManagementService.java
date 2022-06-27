@@ -1,5 +1,6 @@
 package main.services;
 
+import lombok.RequiredArgsConstructor;
 import main.config.Config;
 import main.dto.LinkNodeDto;
 import main.exceptions.BadSiteException;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
 public class ManagementService {
     private final SavePageService savePageService;
     private int numberOfSite = 0;
@@ -28,7 +30,7 @@ public class ManagementService {
     private final IndexRepository indexRepository;
     private final UpdateUrlService updateUrlService;
 
-    @Autowired
+    /*@Autowired
     public ManagementService(SavePageService savePageService, ClearDBService clearDBService, IsIndexingService isIndexingService, FieldRepository fieldRepository,
                              Config config, PageRepository pageRepository, SiteRepository siteRepository,
                              LemmaRepository lemmaRepository, IndexRepository indexRepository, UpdateUrlService updateUrlService) {
@@ -42,7 +44,7 @@ public class ManagementService {
         this.lemmaRepository = lemmaRepository;
         this.indexRepository = indexRepository;
         this.updateUrlService = updateUrlService;
-    }
+    }*/
 
     public StringBuilder startIndexing() {
         StringBuilder indexing = new StringBuilder();

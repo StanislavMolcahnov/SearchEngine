@@ -1,5 +1,6 @@
 package main.services;
 
+import lombok.RequiredArgsConstructor;
 import main.config.Config;
 import main.model.Page;
 import main.model.Site;
@@ -8,10 +9,12 @@ import main.repositories.PageRepository;
 import main.repositories.SiteRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
 public class UpdateUrlService {
     private String path;
     private int siteId = 0;
@@ -25,7 +28,7 @@ public class UpdateUrlService {
     private final IndexRepository indexRepository;
     private Document site;
 
-    public UpdateUrlService(SavePageService savePageService, SiteRepository siteRepository, Config config, IndexingService indexingService,
+    /*public UpdateUrlService(SavePageService savePageService, SiteRepository siteRepository, Config config, IndexingService indexingService,
                             PageRepository pageRepository, IndexRepository indexRepository) {
         this.savePageService = savePageService;
         this.siteRepository = siteRepository;
@@ -33,7 +36,7 @@ public class UpdateUrlService {
         this.indexingService = indexingService;
         this.pageRepository = pageRepository;
         this.indexRepository = indexRepository;
-    }
+    }*/
 
     @Transactional
     public boolean update(String url) {

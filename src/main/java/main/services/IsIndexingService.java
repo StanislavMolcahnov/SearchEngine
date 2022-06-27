@@ -1,5 +1,6 @@
 package main.services;
 
+import lombok.RequiredArgsConstructor;
 import main.model.Site;
 import main.model.StatusType;
 import main.repositories.SiteRepository;
@@ -9,13 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
+@RequiredArgsConstructor(onConstructor =@__({@Autowired}))
 public class IsIndexingService {
     private final SiteRepository siteRepository;
-
-    @Autowired
-    public IsIndexingService(SiteRepository siteRepository) {
-        this.siteRepository = siteRepository;
-    }
 
     public boolean indexingCheck(){
         boolean isIndexing = false;
