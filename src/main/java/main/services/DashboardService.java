@@ -9,7 +9,6 @@ import main.model.Site;
 import main.repositories.LemmaRepository;
 import main.repositories.PageRepository;
 import main.repositories.SiteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +18,12 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class DashboardService {
+
     private final SiteRepository siteRepository;
     private final PageRepository pageRepository;
     private final LemmaRepository lemmaRepository;
     private final IsIndexingService isIndexingService;
+
     public ResponseEntity<ResultStatisticDto> calculateStatistics() {
         ResultStatisticDto result = new ResultStatisticDto();
         StatisticsDto statistics = new StatisticsDto();
@@ -41,6 +42,7 @@ public class DashboardService {
 
         return ResponseEntity.ok(result);
     }
+
     private List<DetailedStatisticsDto> detailedStatistics() {
         DetailedStatisticsDto siteStatistics;
         List<DetailedStatisticsDto> detailedStatistics = new ArrayList<>();

@@ -8,7 +8,6 @@ import main.model.Field;
 import main.model.Site;
 import main.model.StatusType;
 import main.repositories.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,6 +16,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ManagementService {
+
     private final SavePageService savePageService;
     private int numberOfSite = 0;
     private final ClearDBService clearDBService;
@@ -29,6 +29,7 @@ public class ManagementService {
     private final LemmaRepository lemmaRepository;
     private final IndexRepository indexRepository;
     private final UpdateUrlService updateUrlService;
+
     public StringBuilder startIndexing() {
         StringBuilder indexing = new StringBuilder();
         if (isIndexingService.indexingCheck()) {

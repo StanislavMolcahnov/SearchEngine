@@ -1,10 +1,11 @@
 package main.dto;
 
-
 import lombok.Getter;
 
 import java.util.ArrayList;
+
 public class LinkNodeDto {
+
     private volatile LinkNodeDto parent;
     @Getter
     private final String url;
@@ -15,6 +16,7 @@ public class LinkNodeDto {
         this.url = url;
         this.children = new ArrayList<>();
     }
+
     public synchronized void addChild(LinkNodeDto child) {
         LinkNodeDto root = getRootElement();
         if (!root.contains(child.getUrl())) {
@@ -22,14 +24,17 @@ public class LinkNodeDto {
             children.add(child);
         }
     }
+
     private void setParent(LinkNodeDto linkNodeDto) {
         synchronized (this) {
             this.parent = linkNodeDto;
         }
     }
+
     public LinkNodeDto getRootElement() {
         return parent == null ? this : parent.getRootElement();
     }
+
     private boolean contains(String url) {
         if (this.url.equals(url)) {
             return true;
@@ -40,6 +45,7 @@ public class LinkNodeDto {
         }
         return false;
     }
+
     public ArrayList<LinkNodeDto> getChildren() {
         return children;
     }

@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface IndexRepository extends CrudRepository<Index, Integer> {
+
     void deleteByPageId(int pageId);
 
     Iterable<Index> findByLemmaId(int idLemma);

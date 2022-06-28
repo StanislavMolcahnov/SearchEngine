@@ -3,11 +3,9 @@ package main.services;
 import lombok.RequiredArgsConstructor;
 import main.config.Config;
 import main.dto.LinkNodeDto;
-import main.exceptions.BadSiteException;
 import main.model.Site;
 import main.model.StatusType;
 import main.repositories.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,8 +14,8 @@ import java.util.concurrent.ForkJoinPool;
 @Service
 @RequiredArgsConstructor
 public class ThreadDistributor extends Thread {
-    private final SavePageService savePageService;
 
+    private final SavePageService savePageService;
     private ClearDBService clearDBService;
     private LinkNodeDto linkNode;
     private int siteId;

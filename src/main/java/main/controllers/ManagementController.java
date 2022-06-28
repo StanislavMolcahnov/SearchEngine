@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ManagementController {
+
     private final ManagementService managementService;
 
     @Autowired

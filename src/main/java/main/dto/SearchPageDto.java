@@ -1,6 +1,7 @@
 package main.dto;
 
 public class SearchPageDto {
+
     public String site;
     public String siteName;
     public String uri;
@@ -10,6 +11,7 @@ public class SearchPageDto {
 
     @Override
     public String toString() {
+
         return "SearchPageDto{" +
                 "site='" + site + '\'' +
                 ", siteName='" + siteName + '\'' +

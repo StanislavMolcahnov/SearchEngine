@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 @Service
 public class LemmatizerService {
+
     private final Pattern russianPattern = Pattern.compile("[ёЁА-Яа-я]");
     private final Pattern englishPattern = Pattern.compile("[A-Za-z]");
     private TreeMap<String, Integer> countOfLemmas = new TreeMap<>();

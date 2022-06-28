@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import main.repositories.IndexRepository;
 import main.repositories.LemmaRepository;
 import main.repositories.PageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

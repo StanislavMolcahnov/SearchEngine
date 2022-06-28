@@ -8,7 +8,6 @@ import main.repositories.LemmaRepository;
 import main.repositories.PageRepository;
 import main.model.Index;
 import main.model.Lemma;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,6 +16,7 @@ import java.util.TreeMap;
 @Service
 @RequiredArgsConstructor
 public class IndexingService {
+
     private int siteId;
     private final PageRepository pageRepository;
     private final FieldRepository fieldRepository;

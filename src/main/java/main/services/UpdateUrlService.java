@@ -9,13 +9,13 @@ import main.repositories.PageRepository;
 import main.repositories.SiteRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class UpdateUrlService {
+
     private String path;
     private int siteId = 0;
     private String rootUrl = "";
@@ -27,6 +27,7 @@ public class UpdateUrlService {
     private final PageRepository pageRepository;
     private final IndexRepository indexRepository;
     private Document site;
+
     @Transactional
     public boolean update(String url) {
         checkUrl(url);

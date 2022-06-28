@@ -3,6 +3,7 @@ package main.dto;
 import main.model.StatusType;
 
 public class DetailedStatisticsDto {
+
     public String url;
     public String name;
     public StatusType status;

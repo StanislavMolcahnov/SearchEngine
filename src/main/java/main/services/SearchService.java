@@ -16,7 +16,6 @@ import main.repositories.LemmaRepository;
 import main.repositories.PageRepository;
 import main.repositories.SiteRepository;
 import main.model.Page;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +26,7 @@ import java.util.regex.Pattern;
 @Service
 @RequiredArgsConstructor
 public class SearchService {
+
     private SearchResultDto searchResultDto;
     private final PageRepository pageRepository;
     private final IndexRepository indexRepository;

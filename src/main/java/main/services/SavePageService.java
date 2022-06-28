@@ -5,7 +5,6 @@ import main.model.Page;
 import main.repositories.PageRepository;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -13,6 +12,7 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class SavePageService {
+
     private String title;
     private String body;
     private int statusCode;
